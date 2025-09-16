@@ -16,109 +16,80 @@
       font-family: "Consolas", "Courier New", monospace;
       color: #00ff00;
       text-align: center;
-      opacity: 1;
     }
-    .intro-box {
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       max-width: 600px;
     }
     .line {
       display: block;
       white-space: pre-wrap;
-      font-size: 18px;
-      line-height: 1.3;
-      margin-bottom: 5px;
+      font-size: clamp(14px, 2.5vw, 20px);
+      line-height: 1.4;
     }
     #showBtn {
       margin-top: 30px;
       padding: 15px 25px;
-      font-size: 16px;
+      font-size: clamp(14px, 3vw, 18px);
       background: #00ff00;
       color: black;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      display: none;
-      transition: box-shadow 0.3s, transform 0.3s;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
     }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00; transform: scale(1); }
-      50% { box-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00; transform: scale(1.05); }
-      100% { box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00; transform: scale(1); }
-    }
-    #showBtn.pulse {
-      animation: pulse 1s infinite;
-    }
-    #showBtn:hover {
-      box-shadow: 0 0 25px #00ff00, 0 0 50px #00ff00;
-      transform: scale(1.05);
+    #showBtn.visible {
+      opacity: 1;
     }
   </style>
 </head>
 <body>
-  <div class="intro-box" id="introBox">
-    <button id="showBtn">SHOW ME THE POEM!!!!</button>
+  <div class="container">
+    <div class="intro-box" id="introBox"></div>
+    <button id="showBtn" onclick="location.href='poem.html'">SHOW ME THE POEM!!!!</button>
   </div>
 
   <script>
-    const lines = [
-      "Happy Birthday my love,",
-      "Every moment with you feels like a gift,",
-      "Your smile lights up my entire world...",
-      "Here's a poem I wrote to express my love and gratitude for you 💖"
-    ];
-
     const introBox = document.getElementById("introBox");
     const showBtn = document.getElementById("showBtn");
 
+    const introText = [
+      "Happy Birthday my love ❤️",
+      "I wanted to make something special for you.",
+      "So… here's a poem I wrote to express my love and gratitude."
+    ];
+
     let lineIndex = 0;
-    let charIndex = 0;
-    const pauses = {0:[5],2:[10]};
 
     function typeLine() {
-      if(lineIndex < lines.length){
-        let line = lines[lineIndex];
+      if (lineIndex < introText.length) {
+        let lineText = introText[lineIndex];
+        let lineDiv = document.createElement("div");
+        lineDiv.className = "line";
+        introBox.appendChild(lineDiv);
 
-        // Create line div if it doesn't exist
-        let lineDiv = introBox.querySelectorAll('.line')[lineIndex];
-        if(!lineDiv){
-          lineDiv = document.createElement('div');
-          lineDiv.className = 'line';
-          introBox.insertBefore(lineDiv, showBtn); // insert before button
-        }
-
-        // Thinking pause
-        if(pauses[lineIndex] && pauses[lineIndex].includes(charIndex)){
-          setTimeout(()=>{
+        let charIndex = 0;
+        function typeChar() {
+          if (charIndex < lineText.length) {
+            lineDiv.innerHTML += lineText[charIndex];
             charIndex++;
-            typeLine();
-          },700);
-          return;
+            setTimeout(typeChar, 50);
+          } else {
+            lineIndex++;
+            setTimeout(typeLine, 400);
+          }
         }
-
-        if(charIndex < line.length){
-          lineDiv.innerHTML += line.charAt(charIndex);
-          charIndex++;
-          const delay = 50 + Math.random()*70;
-          setTimeout(typeLine, delay);
-        }else{
-          lineIndex++;
-          charIndex=0;
-          setTimeout(typeLine,300);
-        }
-      }else{
-        // Show button after typing
-        showBtn.style.display="inline-block";
-        showBtn.classList.add("pulse");
+        typeChar();
+      } else {
+        // Show button after all lines are typed
+        showBtn.classList.add("visible");
       }
     }
 
     typeLine();
-
-    showBtn.addEventListener("click",()=>{
-      document.body.style.transition="opacity 1s";
-      document.body.style.opacity=0;
-      setTimeout(()=>{window.location.href="poem.html"},1000);
-    });
   </script>
 </body>
 </html>
