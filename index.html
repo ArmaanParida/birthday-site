@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      min-height: 100vh;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* vertical center */
+      align-items: center;     /* horizontal center */
+      text-align: center;
+
+      color: #333;
+      padding: 30px;
+      overflow: hidden; /* for hearts */
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #d6336c;
+      animation: fadeIn 2s ease-in-out;
+      margin-bottom: 20px;
+    }
+
+    #poem {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 20px auto;
+      line-height: 1.6;
+      white-space: pre-line; /* keeps line breaks */
+      border-right: 2px solid #d6336c;
+      display: inline-block;
+      text-align: left;
+      overflow: hidden;
+
+      padding: 15px 20px;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 15px rgba(214, 51, 108, 0.6);
+    }
+
+    .gallery {
+      margin-top: 25px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 15px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Falling hearts */
+    .heart {
+      position: fixed;
+      top: -10px;
+      font-size: 24px;
+      color: #d6336c;
+      animation: fall linear forwards;
+      z-index: 0;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Happy Birthday, My Love ❤️</h1>
+  
+  <p id="poem"></p>
+
+  <div class="gallery">
+    <!-- Add your photos here -->
+    <img src="photo1.jpg" alt="Us 1">
+    <img src="photo2.jpg" alt="Us 2">
+    <img src="photo3.jpg" alt="Us 3">
+    <img src="photo4.jpg" alt="Us 4">
+  </div>
+
+  <script>
+    // Typing effect
+    const poemText = `Roses are red, skies are blue,
+Every heartbeat whispers, "I love you."
+With every smile, my world feels new,
+Forever and always, I'm yours, it’s true.`;
+
+    let i = 0;
+    function typePoem() {
+      if (i < poemText.length) {
+        document.getElementById("poem").innerHTML += poemText.charAt(i);
+        i++;
+        setTimeout(typePoem, 60); // typing speed
+      }
+    }
+    typePoem();
+
+    // Falling hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+    setInterval(createHeart, 500);
+  </script>
+</body>
+</html>
