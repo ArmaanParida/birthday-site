@@ -70,7 +70,7 @@
 
 <!-- Music -->
 <audio id="bgMusic" src="Perfect.mp3" loop></audio>
-<button id="musicBtn">🔊</button>
+<button id="musicBtn">🔇</button>
 
 <script>
 /* ----------------- Slideshow ----------------- */
@@ -174,30 +174,49 @@ scrollPoem();
 poemBox.addEventListener('wheel', ()=>{ autoScroll=false; });
 poemBox.addEventListener('touchstart', ()=>{ autoScroll=false; });
 
-/* ----------------- Music autoplay fix ----------------- */
+/* ----------------- Music ----------------- */
 const musicBtn = document.getElementById('musicBtn');
 const bgMusic = document.getElementById('bgMusic');
+let firstInteraction = false;
 
 function updateBtn(){
-  musicBtn.textContent = bgMusic.muted || bgMusic.paused ? '🔇' : '🔊';
+  if(bgMusic.paused || bgMusic.muted) {
+    musicBtn.textContent = '🔇';
+  } else {
+    musicBtn.textContent = '⏸';
+  }
 }
 
-// Try autoplay
-bgMusic.play().then(() => {
-  bgMusic.muted = false;
+// try autoplay (might fail due to browser)
+bgMusic.play().then(()=>{
   updateBtn();
-}).catch(() => {
+}).catch(()=>{
   bgMusic.muted = true;
   updateBtn();
 });
 
-musicBtn.addEventListener('click', ()=>{
-  if(bgMusic.paused) bgMusic.play();
-  bgMusic.muted = !bgMusic.muted;
+// play on first click anywhere
+document.body.addEventListener('click', () => {
+  if (!firstInteraction) {
+    bgMusic.muted = false;
+    bgMusic.play().catch(()=>{});
+    updateBtn();
+    firstInteraction = true;
+  }
+});
+
+// toggle with button
+musicBtn.addEventListener('click', (e)=>{
+  e.stopPropagation(); // don’t trigger body click
+  if(bgMusic.paused){
+    bgMusic.muted = false;
+    bgMusic.play();
+  } else {
+    bgMusic.pause();
+  }
   updateBtn();
 });
 
-bgMusic.addEventListener('volumechange', updateBtn);
 updateBtn();
 </script>
 
