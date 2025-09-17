@@ -69,7 +69,7 @@
 <div class="poem-box" id="poemBox"></div>
 
 <!-- Music -->
-<audio id="bgMusic" src="Perfect.mp3" autoplay loop></audio>
+<audio id="bgMusic" src="Perfect.mp3" loop></audio>
 <button id="musicBtn">🔊</button>
 
 <script>
@@ -137,8 +137,7 @@ const poemLines = [
   "I know how happy you must be, reading this.... and that happiness is all I care about and would do absolutely anything to see you be happy everytime."
 ];
 
-let lineIndex=0, charIndex=0, autoScroll=true;
-
+let lineIndex=0;
 function typeLine(){
   if(lineIndex<poemLines.length){
     let lineText = poemLines[lineIndex];
@@ -164,6 +163,7 @@ function typeLine(){
 typeLine();
 
 /* Auto-scroll like lyrics */
+let autoScroll=true;
 function scrollPoem(){
   if(autoScroll){
     poemBox.scrollTop += 0.5;
@@ -174,18 +174,29 @@ scrollPoem();
 poemBox.addEventListener('wheel', ()=>{ autoScroll=false; });
 poemBox.addEventListener('touchstart', ()=>{ autoScroll=false; });
 
-/* ----------------- Music button ----------------- */
+/* ----------------- Music autoplay fix ----------------- */
 const musicBtn = document.getElementById('musicBtn');
 const bgMusic = document.getElementById('bgMusic');
 
 function updateBtn(){
-  musicBtn.textContent = bgMusic.muted ? '🔇' : '🔊';
+  musicBtn.textContent = bgMusic.muted || bgMusic.paused ? '🔇' : '🔊';
 }
 
+// Try autoplay
+bgMusic.play().then(() => {
+  bgMusic.muted = false;
+  updateBtn();
+}).catch(() => {
+  bgMusic.muted = true;
+  updateBtn();
+});
+
 musicBtn.addEventListener('click', ()=>{
+  if(bgMusic.paused) bgMusic.play();
   bgMusic.muted = !bgMusic.muted;
   updateBtn();
 });
+
 bgMusic.addEventListener('volumechange', updateBtn);
 updateBtn();
 </script>
