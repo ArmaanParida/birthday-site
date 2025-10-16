@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Poem for You ❤️</title>
+<title>Meri Shayari Tumhare Liye ❤️</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body, html { height:100%; overflow:hidden; font-family: 'Arial', sans-serif; }
@@ -96,45 +96,48 @@ document.addEventListener('touchend', e=>{
 /* ----------------- Poem fade-in typing & scrolling ----------------- */
 const poemBox = document.getElementById('poemBox');
 const poemLines = [
-  "Happy Birthday, my love, my shining star,",
-  "Every day with you feels like the best by far.",
-  "Your laughter is music, your smile, my light,",
-  "You make even the ordinary feel so bright.",
+  "Janamdin mubarak ho, meri roshni, meri jaan,",
+  "Har pal tere saath, lagta hai khushiyon ka samaan.",
+  "Teri hasi hai sangeet, tera muskaan mera ujala,",
+  "Tere saath har lamha, hai jaise ek pyara sa kissa.",
 
-  "Through every moment, through joy and through strife,",
-  "I’m grateful for you, my love, my life.",
-  "With every heartbeat, my feelings grow deep,",
-  "Memories of you are treasures I keep.",
+  "Har ek pal mein, khushi aur dard ke safar mein,",
+  "Main shukriya ada karta hoon, meri zindagi ke pyare palon mein.",
+  "Har dhadkan ke saath, badhta jaa raha hai mera pyaar,",
+  "Teri yaadon ko sambhal ke rakhta hoon, dil ke andar yeh ikraar.",
 
-  "From silly jokes to quiet, gentle talks,",
-  "From hand-in-hand walks to late-night moon walks,",
-  "You’re my inspiration, my comfort, my cheer,",
-  "Today and always, I’m so glad you’re near.",
+  "Chhoti si baatein, hasi mazaak ke pal,",
+  "Haath mein haath, raat ke chaand ke sang chal,",
+  "Tu meri prerana, meri muskaan, mera saath,",
+  "Aaj aur hamesha, khush hoon main ki tu mere paas.",
 
-  "Your kindness and care light up my days,",
-  "In so many little, unforgettable ways.",
-  "You make me laugh, you make me feel whole,",
-  "The one who’s etched forever in my soul.",
+  "Teri dayalu muskaan, roshni kar deti hai din mera,",
+  "Chhoti chhoti baaton mein, tu hai yaadon ka sahara mera.",
+  "Tu hansi hai, tu khushi hai, tu meri poori duniya ka sukoon,",
+  "Jo tere saath ho, uska dil sada khushiyon ka ho junoon.",
 
-  "So here’s a poem, written just for you,",
-  "A small token of love, honest and true.",
-  "May this year bring you joy, laughter, and fun,",
-  "Because with you, my love, life’s only just begun.",
+  "Yeh chhoti si shayari, sirf tere liye likhi maine,",
+  "Ek chhoti si nishani pyaar ki, jo hai sacchi aur pyari jaise dhadkan ka raag.",
+  "Iss saal teri zindagi mein ho khushi, hasi aur rangon ka jahan,",
+  "Kyuki tere saath hai zindagi meri, har pal bas teri hi pehchaan.",
 
-  "I promise to stand by you, come what may,",
-  "To cherish, to love, in every possible way.",
-  "For every dream you dream, I’ll be there to see,",
-  "Because your happiness means the world to me.",
+  "Main wada karta hoon, hamesha tere saath rahunga,",
+  "Har pal pyaar aur mohabbat se, tere sapne mein shaamil rahunga.",
+  "Har khwaab jo tu dekhegi, usme main bhi hoon shamil,",
+  "Tere khushi ke liye, main kuch bhi kar jaaunga, har pal aur har lamha khil.",
+  
+  "Log kehte hain tu chaand ka tukda lagti hai,",
+  "Mein kehta hoon chaand tera tukda lagta hai.", 
+  "Kyunki taadne walo ko kya pata... Niharna kya hota hai,",
+  "Saara sheher ghoom liya, saara sheher kaafi nahi tha,",
+  "Par jab teri aankhon ko dekha... Aur kuch baaki nahi tha."
+  
+  "Janamdin mubarak ho, meri jaan, meri roshni, meri dhadkan,",
+  "Tere saath meri zindagi hai, jaise chaand aur sitare sath sath.",
+  "Aaj, kal aur har naye din mein,",
+  "Main hamesha tujhe chahunga, pyar karunga aur tera saath nibhaunga.",
 
-  "Happy Birthday, my heart, my light, my muse,",
-  "With you, my life feels forever infused.",
-  "Today, tomorrow, and every day anew,",
-  "I’ll celebrate, adore, and endlessly love you.",
-  "Log kehte hain tu kya chaand ka tukda lag rhi hai",
-  "Mein kehta hoon chaand hamesha tera tukda lagta hai.",
-  "Esi khoobsoorti, jo sirf tujhpe hi subhae",
-  "Tujhe dekh kar toh... Chaand taare bhi sharma jaye",
-  "I know how happy you must be, reading this.... and that happiness is all I care about and would do absolutely anything to see you be happy everytime."
+  
 ];
 
 let lineIndex=0;
@@ -207,7 +210,7 @@ document.body.addEventListener('click', () => {
 
 // toggle with button
 musicBtn.addEventListener('click', (e)=>{
-  e.stopPropagation(); // don’t trigger body click
+  e.stopPropagation();
   if(bgMusic.paused){
     bgMusic.muted = false;
     bgMusic.play();
