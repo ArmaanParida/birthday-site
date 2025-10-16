@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Meri Shayari Tumhare Liye ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-  body, html { height:100%; overflow:hidden; font-family: 'Arial', sans-serif; }
+  body, html { height:100%; overflow:hidden; font-family: 'Merriweather', serif; }
   body { background:black; }
 
   /* Slideshow */
@@ -26,7 +27,7 @@
     border-radius:15px;
     overflow-y:auto;
     font-size:18px;
-    line-height:1.5;
+    line-height:1.8;
     text-align:center;
   }
 
@@ -34,8 +35,8 @@
   .poem-box::-webkit-scrollbar { display:none; }
   .poem-box { -ms-overflow-style:none; scrollbar-width:none; }
 
-  /* Poem line fade-in */
-  .poem-line { opacity:0; transition: opacity 1s ease; }
+  /* Poem line fade-in + stanza spacing */
+  .poem-line { opacity:0; transition: opacity 1s ease; margin-bottom:16px; }
 
   /* Music button */
   #musicBtn {
@@ -121,16 +122,17 @@ const poemLines = [
   "Is saal tumhe khushi, hasi aur masti mile,",
   "Kyunki tumhare saath, zindagi sirf shuruaat hai.",
 
+  "Janmadin mubarak ho, meri rooh, meri muskaan, meri pyaari,",
+  "Tumhare saath, meri zindagi hamesha rangin hai.",
+  "Aaj, kal aur har din naye tareeke se,",
+  "Main tumhe pyar karunga, pooja karunga aur hamesha celebrate karunga.",
+
   "Log kehte hain tu chaand ka tukda lagti hai,",
   "Mein kehta hoon chaand tera tukda lagta hai.", 
   "Kyunki taadne walo ko kya pata... Niharna kya hota hai",
   "Saara sheher ghoom liya, saara sheher kaafi nhi tha",
   "Par jab teri aankhon ko dekha... Aur kuch baaki nhi tha",
 
-  "Janmadin mubarak ho, meri rooh, meri muskaan, meri pyaari,",
-  "Tumhare saath, meri zindagi hamesha rangin hai.",
-  "Aaj, kal aur har din naye tareeke se,",
-  "Main tumhe pyar karunga, pooja karunga aur hamesha celebrate karunga.",
   "Mujhe bas tumhari khushi chahiye, aur main kuch bhi kar jaunga sirf tumhari muskaan ke liye."
 ];
 
