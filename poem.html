@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,8 +69,8 @@
 <div class="poem-box" id="poemBox"></div>
 
 <!-- Music -->
-<audio id="bgMusic" src="Perfect.mp3" loop></audio>
-<button id="musicBtn">🔇</button>
+<audio id="bgMusic" src="Perfect.mp3" loop muted></audio>
+<button id="musicBtn">🔊</button>
 
 <script>
 /* ----------------- Slideshow ----------------- */
@@ -96,48 +96,42 @@ document.addEventListener('touchend', e=>{
 /* ----------------- Poem fade-in typing & scrolling ----------------- */
 const poemBox = document.getElementById('poemBox');
 const poemLines = [
-  "Janamdin mubarak ho, meri roshni, meri jaan,",
-  "Har pal tere saath, lagta hai khushiyon ka samaan.",
-  "Teri hasi hai sangeet, tera muskaan mera ujala,",
-  "Tere saath har lamha, hai jaise ek pyara sa kissa.",
+  "Janmadin ki shubhkamnayein, meri pyaari roshni,",
+  "Har din tumhare saath lagta hai sabse khaas.",
+  "Tumhari hasi hai sangeet, tumhari muskaan meri roshni,",
+  "Tum hi ho jo sab kuch roshan kar dete ho.",
 
-  "Har ek pal mein, khushi aur dard ke safar mein,",
-  "Main shukriya ada karta hoon, meri zindagi ke pyare palon mein.",
-  "Har dhadkan ke saath, badhta jaa raha hai mera pyaar,",
-  "Teri yaadon ko sambhal ke rakhta hoon, dil ke andar yeh ikraar.",
+  "Har pal, har khushi aur har dukh mein,",
+  "Main aabhari hoon tumhare, meri zindagi ke liye.",
+  "Har dhadkan ke saath, meri feelings gehri hoti hain,",
+  "Tumhare yaadein mere liye hamesha anmol rahengi.",
 
-  "Chhoti si baatein, hasi mazaak ke pal,",
-  "Haath mein haath, raat ke chaand ke sang chal,",
-  "Tu meri prerana, meri muskaan, mera saath,",
-  "Aaj aur hamesha, khush hoon main ki tu mere paas.",
+  "Masti bhari baatein ya shaant pal,",
+  "Haath mein haath ya chandni raat ke pal,",
+  "Tum meri prerna, mera sukoon, meri khushi ho,",
+  "Aaj aur hamesha, khush hoon ki tum mere paas ho.",
 
-  "Teri dayalu muskaan, roshni kar deti hai din mera,",
-  "Chhoti chhoti baaton mein, tu hai yaadon ka sahara mera.",
-  "Tu hansi hai, tu khushi hai, tu meri poori duniya ka sukoon,",
-  "Jo tere saath ho, uska dil sada khushiyon ka ho junoon.",
+  "Tumhari dayalu aur pyaari baatein roshan kar deti hain din,",
+  "Itni chhoti chhoti baatein, par yaadgar hamesha rahengi.",
+  "Tum mujhe hasate ho, mujhe poora mehsoos karvate ho,",
+  "Jo hamesha meri rooh mein bas gaya hai.",
 
-  "Yeh chhoti si shayari, sirf tere liye likhi maine,",
-  "Ek chhoti si nishani pyaar ki, jo hai sacchi aur pyari jaise dhadkan ka raag.",
-  "Iss saal teri zindagi mein ho khushi, hasi aur rangon ka jahan,",
-  "Kyuki tere saath hai zindagi meri, har pal bas teri hi pehchaan.",
+  "Yeh chhoti si shayari, sirf tumhare liye,",
+  "Ek chhoti si nishani, sach aur pyaar bhari.",
+  "Is saal tumhe khushi, hasi aur masti mile,",
+  "Kyunki tumhare saath, zindagi sirf shuruaat hai.",
 
-  "Main wada karta hoon, hamesha tere saath rahunga,",
-  "Har pal pyaar aur mohabbat se, tere sapne mein shaamil rahunga.",
-  "Har khwaab jo tu dekhegi, usme main bhi hoon shamil,",
-  "Tere khushi ke liye, main kuch bhi kar jaaunga, har pal aur har lamha khil.",
-  
   "Log kehte hain tu chaand ka tukda lagti hai,",
   "Mein kehta hoon chaand tera tukda lagta hai.", 
-  "Kyunki taadne walo ko kya pata... Niharna kya hota hai,",
-  "Saara sheher ghoom liya, saara sheher kaafi nahi tha,",
-  "Par jab teri aankhon ko dekha... Aur kuch baaki nahi tha."
-  
-  "Janamdin mubarak ho, meri jaan, meri roshni, meri dhadkan,",
-  "Tere saath meri zindagi hai, jaise chaand aur sitare sath sath.",
-  "Aaj, kal aur har naye din mein,",
-  "Main hamesha tujhe chahunga, pyar karunga aur tera saath nibhaunga.",
+  "Kyunki taadne walo ko kya pata... Niharna kya hota hai",
+  "Saara sheher ghoom liya, saara sheher kaafi nhi tha",
+  "Par jab teri aankhon ko dekha... Aur kuch baaki nhi tha",
 
-  
+  "Janmadin mubarak ho, meri rooh, meri muskaan, meri pyaari,",
+  "Tumhare saath, meri zindagi hamesha rangin hai.",
+  "Aaj, kal aur har din naye tareeke se,",
+  "Main tumhe pyar karunga, pooja karunga aur hamesha celebrate karunga.",
+  "Mujhe bas tumhari khushi chahiye, aur main kuch bhi kar jaunga sirf tumhari muskaan ke liye."
 ];
 
 let lineIndex=0;
@@ -177,42 +171,33 @@ scrollPoem();
 poemBox.addEventListener('wheel', ()=>{ autoScroll=false; });
 poemBox.addEventListener('touchstart', ()=>{ autoScroll=false; });
 
-/* ----------------- Music ----------------- */
+/* ----------------- Music autoplay & play/pause ----------------- */
 const musicBtn = document.getElementById('musicBtn');
 const bgMusic = document.getElementById('bgMusic');
-let firstInteraction = false;
+let firstClick=false;
 
 function updateBtn(){
-  if(bgMusic.paused || bgMusic.muted) {
-    musicBtn.textContent = '🔇';
-  } else {
-    musicBtn.textContent = '⏸';
-  }
+  musicBtn.textContent = bgMusic.paused || bgMusic.muted ? '🔇' : '⏸';
 }
 
-// try autoplay (might fail due to browser)
-bgMusic.play().then(()=>{
-  updateBtn();
-}).catch(()=>{
-  bgMusic.muted = true;
-  updateBtn();
-});
+// Attempt autoplay (usually muted)
+bgMusic.play().catch(()=>{ bgMusic.muted=true; updateBtn(); });
 
-// play on first click anywhere
+// Click anywhere to start
 document.body.addEventListener('click', () => {
-  if (!firstInteraction) {
-    bgMusic.muted = false;
+  if(!firstClick){
+    bgMusic.muted=false;
     bgMusic.play().catch(()=>{});
     updateBtn();
-    firstInteraction = true;
+    firstClick=true;
   }
 });
 
-// toggle with button
-musicBtn.addEventListener('click', (e)=>{
+// Button toggle
+musicBtn.addEventListener('click', e=>{
   e.stopPropagation();
   if(bgMusic.paused){
-    bgMusic.muted = false;
+    bgMusic.muted=false;
     bgMusic.play();
   } else {
     bgMusic.pause();
@@ -220,6 +205,7 @@ musicBtn.addEventListener('click', (e)=>{
   updateBtn();
 });
 
+bgMusic.addEventListener('volumechange', updateBtn);
 updateBtn();
 </script>
 
